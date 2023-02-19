@@ -7,8 +7,6 @@ namespace HangmanClass.Scripts
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _winText;
-        [SerializeField] private TextMeshProUGUI _loseText;
         [SerializeField] private TextMeshProUGUI _enterWord;
         [SerializeField] private TextMeshProUGUI _hpField;
         [SerializeField] private HangmanController _hangmanController;
@@ -27,7 +25,7 @@ namespace HangmanClass.Scripts
             wordToGuess = _words[randomIndex];
             _descriptionController.SetDescription(wordToGuess.Description);
         }
-        
+
         void OnGUI()
         {
             Event e = Event.current;
@@ -60,18 +58,17 @@ namespace HangmanClass.Scripts
             {
                 wrongTriedLetter.Add(pressedKeyChar);
                 hp -= 1;
-                 if (_hpField != null) _hpField.text = "-1 HP/ " + hp;
-                
-                if (hp <= 0)
-                {
-                    print("You Lost!");
-                    if (_loseText != null) _loseText.text = "You Lost!";
-                }
+                if (_hpField != null) _hpField.text = "-1 HP/ " + hp;
 
                 print("Wrong letter! Hp left = " + hp);
                 print("Word  = " + wordToGuess);
                 _hangmanController.HangmanDrawer(hp);
-                return;
+
+                if (hp <= 0)
+                {
+                    GameLost gameLost = gameObject.GetComponent<GameLost>();
+                    gameLost.LoseShowText();
+                }
             }
 
             // Если буква не угадана ранее и содержится в загаданном слове, добавляем ее в список угаданных букв
@@ -98,8 +95,8 @@ namespace HangmanClass.Scripts
 
             if (wordToGuess.Word.ToUpper() == stringToPrint.ToUpper())
             {
-                print("You win!");
-                if (_winText != null) _winText.text = "You win!";
+                GameWin gameWin = gameObject.GetComponent<GameWin>();
+                gameWin.WinShowText();
             }
 
             print(stringToPrint);
