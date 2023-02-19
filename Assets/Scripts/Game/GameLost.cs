@@ -6,11 +6,19 @@ namespace HangmanClass.Scripts
     public class GameLost : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _loseText;
+        [SerializeField] private GameObject restartButton;
 
         public void LoseShowText()
         {
             print("You Lost!");
             if (_loseText != null) _loseText.text = "You Lost!";
+            
+            // Делаем кнопку рестарта активной
+            restartButton.SetActive(true);
+
+            // Отключаем возможность ввода слов
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.enabled = false;
         }
     }
 }
