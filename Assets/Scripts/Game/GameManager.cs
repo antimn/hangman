@@ -26,17 +26,29 @@ namespace HangmanClass.Scripts
             _descriptionController.SetDescription(wordToGuess.Description);
         }
 
-        void OnGUI()
+        void Update()
         {
-            Event e = Event.current;
-            if (e.isKey)
+            if (Input.anyKeyDown)
             {
-                if (e.keyCode != KeyCode.None && lastKeyPressed != e.keyCode)
+                foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                 {
-                    ProcessKey(e.keyCode);
-                    lastKeyPressed = e.keyCode;
+                    if (Input.GetKeyDown(keyCode) && keyCode != lastKeyPressed)
+                    {
+                        ProcessKey(keyCode);
+                        lastKeyPressed = keyCode;
+                    }
                 }
             }
+            
+            // Event e = Event.current;
+            // if (e.isKey)
+            // {
+            //     if (e.keyCode != KeyCode.None && lastKeyPressed != e.keyCode)
+            //     {
+            //         ProcessKey(e.keyCode);
+            //         lastKeyPressed = e.keyCode;
+            //     }
+            // }
         }
 
 
