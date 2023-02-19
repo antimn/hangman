@@ -10,6 +10,7 @@ namespace HangmanClass.Scripts
         [SerializeField] private TextMeshProUGUI _winText;
         [SerializeField] private TextMeshProUGUI _loseText;
         [SerializeField] private TextMeshProUGUI _enterWord;
+        [SerializeField] private TextMeshProUGUI _hpField;
         [SerializeField] private HangmanController _hangmanController;
         [SerializeField] private DescriptionController _descriptionController;
         [SerializeField] private List<WordModel> _words;
@@ -59,7 +60,8 @@ namespace HangmanClass.Scripts
             {
                 wrongTriedLetter.Add(pressedKeyChar);
                 hp -= 1;
-
+                 if (_hpField != null) _hpField.text = "-1 HP/ " + hp;
+                
                 if (hp <= 0)
                 {
                     print("You Lost!");
