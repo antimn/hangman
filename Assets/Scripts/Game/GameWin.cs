@@ -23,7 +23,7 @@ namespace HangmanClass.Scripts
             // тому, что компонент больше не обрабатывает события в игр
             // Таким образом, если GameManager ранее управлял логикой игры, то после выполнения этого кода игрок не сможет
             // взаимодействовать с игрой, так как его логика более не обрабатывается.
-                GameManager gameManager = FindObjectOfType<GameManager>();
+            GameManager gameManager = FindObjectOfType<GameManager>();
             gameManager.enabled = false;
         }
     }
